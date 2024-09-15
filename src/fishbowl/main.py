@@ -1,6 +1,8 @@
 import pygame as pg
 
 from fishbowl.config import config
+from fishbowl.entities import Inhabitant
+from fishbowl.world import World
 
 
 class Fishbowl:
@@ -16,6 +18,14 @@ class Fishbowl:
         self.fps = int(config.get("game.fps"))
         self.show_fps = bool(config.get("debug.show_fps"))
         self.running = True
+
+        self.world = World()
+        self.world.add_entity(
+            Inhabitant(
+                x=self.screen.get_width() // 2,
+                y=self.screen.get_height() // 2,
+            )
+        )
 
     def run(self):
         while self.running:
@@ -39,3 +49,4 @@ class Fishbowl:
 
     def draw(self):
         self.screen.fill((30, 30, 30))
+        self.world.draw(self.screen)
