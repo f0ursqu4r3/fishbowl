@@ -1,5 +1,7 @@
 import pygame as pg
 
+from fishbowl.intelligence import InhabitantPlanner
+
 
 class Entity:
     def __init__(self, x, y):
@@ -19,6 +21,19 @@ class Inhabitant(Entity):
         self.speed = 100
         self.surface = pg.Surface((50, 50))
         self.surface.fill((255, 255, 255))
+        self.state = {
+            "hunger": 0,
+            "tiredness": 0,
+            "boredom": 0,
+            "health": 100,
+        }
+        self.goal_state = {
+            "hunger": 0,
+            "tiredness": 0,
+            "boredom": 0,
+            "health": 100,
+        }
+        self.planner = InhabitantPlanner()
 
     def update(self):
         pass
@@ -32,7 +47,7 @@ class Inhabitant(Entity):
         )
 
 
-class Object(Entity):
+class Food(Entity):
     def __init__(self, x, y):
         super().__init__(x, y)
 
